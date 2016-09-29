@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.foodie.web.dao.StepMapper" >
+  <resultMap id="BaseResultMap" type="com.foodie.web.model.Step" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="recipeId" property="recipeId" jdbcType="VARCHAR" />
+    <result column="imageUrl" property="imageUrl" jdbcType="VARCHAR" />
+    <result column="introduction" property="introduction" jdbcType="VARCHAR" />
+    <result column="order" property="order" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, recipeId, imageUrl, introduction, order
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from step
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from step
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.foodie.web.model.Step" >
+    insert into step (id, recipeId, imageUrl, 
+      introduction, order)
+    values (#{id,jdbcType=VARCHAR}, #{recipeId,jdbcType=VARCHAR}, #{imageUrl,jdbcType=VARCHAR}, 
+      #{introduction,jdbcType=VARCHAR}, #{order,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.foodie.web.model.Step" >
+    insert into step
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="recipeId != null" >
+        recipeId,
+      </if>
+      <if test="imageUrl != null" >
+        imageUrl,
+      </if>
+      <if test="introduction != null" >
+        introduction,
+      </if>
+      <if test="order != null" >
+        order,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="recipeId != null" >
+        #{recipeId,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null" >
+        #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null" >
+        #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="order != null" >
+        #{order,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.foodie.web.model.Step" >
+    update step
+    <set >
+      <if test="recipeId != null" >
+        recipeId = #{recipeId,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null" >
+        imageUrl = #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null" >
+        introduction = #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="order != null" >
+        order = #{order,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.foodie.web.model.Step" >
+    update step
+    set recipeId = #{recipeId,jdbcType=VARCHAR},
+      imageUrl = #{imageUrl,jdbcType=VARCHAR},
+      introduction = #{introduction,jdbcType=VARCHAR},
+      order = #{order,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

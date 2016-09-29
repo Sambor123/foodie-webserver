@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.foodie.web.dao.FansMapper" >
+  <resultMap id="BaseResultMap" type="com.foodie.web.model.Fans" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="userId" property="userId" jdbcType="VARCHAR" />
+    <result column="fansId" property="fansId" jdbcType="VARCHAR" />
+    <result column="followTime" property="followTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, userId, fansId, followTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from fans
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+   <select id="selectByTwoId" resultMap="BaseResultMap" parameterType="HashMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from fans
+    where userId = #{userId,jdbcType=VARCHAR} AND fansId=#{fansId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from fans
+    where userId = #{userId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByFansId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from fans
+    where fansId = #{fansId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from fans
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.foodie.web.model.Fans" >
+    insert into fans (id, userId, fansId, 
+      followTime)
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{fansId,jdbcType=VARCHAR}, 
+      #{followTime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.foodie.web.model.Fans" >
+    insert into fans
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        userId,
+      </if>
+      <if test="fansId != null" >
+        fansId,
+      </if>
+      <if test="followTime != null" >
+        followTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="fansId != null" >
+        #{fansId,jdbcType=VARCHAR},
+      </if>
+      <if test="followTime != null" >
+        #{followTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.foodie.web.model.Fans" >
+    update fans
+    <set >
+      <if test="userId != null" >
+        userId = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="fansId != null" >
+        fansId = #{fansId,jdbcType=VARCHAR},
+      </if>
+      <if test="followTime != null" >
+        followTime = #{followTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.foodie.web.model.Fans" >
+    update fans
+    set userId = #{userId,jdbcType=VARCHAR},
+      fansId = #{fansId,jdbcType=VARCHAR},
+      followTime = #{followTime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

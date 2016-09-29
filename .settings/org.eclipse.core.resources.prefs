@@ -1,0 +1,8 @@
+eclipse.preferences.version=1
+encoding//src/main/java=UTF-8
+encoding//src/main/resources/jdbc.properties=UTF-8
+encoding//src/main/resources/messages.properties=UTF-8
+encoding//src/test/java=UTF-8
+encoding//src/test/resources/generatorConfig.properties=UTF-8
+encoding//src/test/resources/generatorConfig.xml=UTF-8
+encoding/<project>=UTF-8

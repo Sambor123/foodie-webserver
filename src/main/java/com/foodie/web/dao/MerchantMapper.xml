@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.foodie.web.dao.MerchantMapper" >
+  <resultMap id="BaseResultMap" type="com.foodie.web.model.Merchant" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="loginName" property="loginName" jdbcType="VARCHAR" />
+    <result column="loginPassword" property="loginPassword" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="desc" property="desc" jdbcType="VARCHAR" />
+    <result column="picture" property="picture" jdbcType="VARCHAR" />
+    <result column="registerTime" property="registerTime" jdbcType="VARCHAR" />
+    <result column="legalName" property="legalName" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="score" property="score" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, loginName, loginPassword, address, desc, picture, registerTime, legalName, status, 
+    score, type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from merchant
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from merchant
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.foodie.web.model.Merchant" >
+    insert into merchant (id, loginName, loginPassword, 
+      address, desc, picture, 
+      registerTime, legalName, status, 
+      score, type)
+    values (#{id,jdbcType=VARCHAR}, #{loginName,jdbcType=VARCHAR}, #{loginPassword,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, 
+      #{registerTime,jdbcType=VARCHAR}, #{legalName,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{score,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.foodie.web.model.Merchant" >
+    insert into merchant
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="loginName != null" >
+        loginName,
+      </if>
+      <if test="loginPassword != null" >
+        loginPassword,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="desc != null" >
+        desc,
+      </if>
+      <if test="picture != null" >
+        picture,
+      </if>
+      <if test="registerTime != null" >
+        registerTime,
+      </if>
+      <if test="legalName != null" >
+        legalName,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="loginName != null" >
+        #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="loginPassword != null" >
+        #{loginPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="desc != null" >
+        #{desc,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null" >
+        #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="registerTime != null" >
+        #{registerTime,jdbcType=VARCHAR},
+      </if>
+      <if test="legalName != null" >
+        #{legalName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.foodie.web.model.Merchant" >
+    update merchant
+    <set >
+      <if test="loginName != null" >
+        loginName = #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="loginPassword != null" >
+        loginPassword = #{loginPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="desc != null" >
+        desc = #{desc,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null" >
+        picture = #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="registerTime != null" >
+        registerTime = #{registerTime,jdbcType=VARCHAR},
+      </if>
+      <if test="legalName != null" >
+        legalName = #{legalName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.foodie.web.model.Merchant" >
+    update merchant
+    set loginName = #{loginName,jdbcType=VARCHAR},
+      loginPassword = #{loginPassword,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      desc = #{desc,jdbcType=VARCHAR},
+      picture = #{picture,jdbcType=VARCHAR},
+      registerTime = #{registerTime,jdbcType=VARCHAR},
+      legalName = #{legalName,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      score = #{score,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

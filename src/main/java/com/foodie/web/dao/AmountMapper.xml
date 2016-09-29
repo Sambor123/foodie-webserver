@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.foodie.web.dao.AmountMapper" >
+  <resultMap id="BaseResultMap" type="com.foodie.web.model.Amount" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="recipeId" property="recipeId" jdbcType="VARCHAR" />
+    <result column="ingredientId" property="ingredientId" jdbcType="VARCHAR" />
+    <result column="amount" property="amount" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, recipeId, ingredientId, amount
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from amount
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from amount
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.foodie.web.model.Amount" >
+    insert into amount (id, recipeId, ingredientId, 
+      amount)
+    values (#{id,jdbcType=VARCHAR}, #{recipeId,jdbcType=VARCHAR}, #{ingredientId,jdbcType=VARCHAR}, 
+      #{amount,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.foodie.web.model.Amount" >
+    insert into amount
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="recipeId != null" >
+        recipeId,
+      </if>
+      <if test="ingredientId != null" >
+        ingredientId,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="recipeId != null" >
+        #{recipeId,jdbcType=VARCHAR},
+      </if>
+      <if test="ingredientId != null" >
+        #{ingredientId,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.foodie.web.model.Amount" >
+    update amount
+    <set >
+      <if test="recipeId != null" >
+        recipeId = #{recipeId,jdbcType=VARCHAR},
+      </if>
+      <if test="ingredientId != null" >
+        ingredientId = #{ingredientId,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.foodie.web.model.Amount" >
+    update amount
+    set recipeId = #{recipeId,jdbcType=VARCHAR},
+      ingredientId = #{ingredientId,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

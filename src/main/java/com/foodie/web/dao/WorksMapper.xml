@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.foodie.web.dao.WorksMapper" >
+  <resultMap id="BaseResultMap" type="com.foodie.web.model.Works" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="dishName" property="dishName" jdbcType="VARCHAR" />
+    <result column="introduction" property="introduction" jdbcType="VARCHAR" />
+    <result column="userId" property="userId" jdbcType="VARCHAR" />
+    <result column="createTime" property="createTime" jdbcType="VARCHAR" />
+    <result column="themeId" property="themeId" jdbcType="VARCHAR" />
+    <result column="thumbnail" property="thumbnail" jdbcType="VARCHAR" />
+    <result column="viewCount" property="viewCount" jdbcType="INTEGER" />
+    <result column="commentCount" property="commentCount" jdbcType="INTEGER" />
+    <result column="likeCount" property="likeCount" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, dishName, introduction, userId, createTime, themeId, thumbnail, viewCount, commentCount, 
+    likeCount
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from works
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from works
+    where userId = #{userId,jdbcType=VARCHAR}
+  </select>
+  <select id="getAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from works
+    order by createTime desc
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from works
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.foodie.web.model.Works" >
+    insert into works (id, dishName, introduction, 
+      userId, createTime, themeId, 
+      thumbnail, viewCount, commentCount, 
+      likeCount)
+    values (#{id,jdbcType=VARCHAR}, #{dishName,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, #{themeId,jdbcType=VARCHAR}, 
+      #{thumbnail,jdbcType=VARCHAR}, #{viewCount,jdbcType=INTEGER}, #{commentCount,jdbcType=INTEGER}, 
+      #{likeCount,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.foodie.web.model.Works" >
+    insert into works
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="dishName != null" >
+        dishName,
+      </if>
+      <if test="introduction != null" >
+        introduction,
+      </if>
+      <if test="userId != null" >
+        userId,
+      </if>
+      <if test="createTime != null" >
+        createTime,
+      </if>
+      <if test="themeId != null" >
+        themeId,
+      </if>
+      <if test="thumbnail != null" >
+        thumbnail,
+      </if>
+      <if test="viewCount != null" >
+        viewCount,
+      </if>
+      <if test="commentCount != null" >
+        commentCount,
+      </if>
+      <if test="likeCount != null" >
+        likeCount,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="dishName != null" >
+        #{dishName,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null" >
+        #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="themeId != null" >
+        #{themeId,jdbcType=VARCHAR},
+      </if>
+      <if test="thumbnail != null" >
+        #{thumbnail,jdbcType=VARCHAR},
+      </if>
+      <if test="viewCount != null" >
+        #{viewCount,jdbcType=INTEGER},
+      </if>
+      <if test="commentCount != null" >
+        #{commentCount,jdbcType=INTEGER},
+      </if>
+      <if test="likeCount != null" >
+        #{likeCount,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.foodie.web.model.Works" >
+    update works
+    <set >
+      <if test="dishName != null" >
+        dishName = #{dishName,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null" >
+        introduction = #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        userId = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        createTime = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="themeId != null" >
+        themeId = #{themeId,jdbcType=VARCHAR},
+      </if>
+      <if test="thumbnail != null" >
+        thumbnail = #{thumbnail,jdbcType=VARCHAR},
+      </if>
+      <if test="viewCount != null" >
+        viewCount = #{viewCount,jdbcType=INTEGER},
+      </if>
+      <if test="commentCount != null" >
+        commentCount = #{commentCount,jdbcType=INTEGER},
+      </if>
+      <if test="likeCount != null" >
+        likeCount = #{likeCount,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.foodie.web.model.Works" >
+    update works
+    set dishName = #{dishName,jdbcType=VARCHAR},
+      introduction = #{introduction,jdbcType=VARCHAR},
+      userId = #{userId,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=VARCHAR},
+      themeId = #{themeId,jdbcType=VARCHAR},
+      thumbnail = #{thumbnail,jdbcType=VARCHAR},
+      viewCount = #{viewCount,jdbcType=INTEGER},
+      commentCount = #{commentCount,jdbcType=INTEGER},
+      likeCount = #{likeCount,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

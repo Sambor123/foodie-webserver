@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.foodie.web.dao.DishMapper" >
+  <resultMap id="BaseResultMap" type="com.foodie.web.model.Dish" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="restaurantId" property="restaurantId" jdbcType="VARCHAR" />
+    <result column="categoryId" property="categoryId" jdbcType="VARCHAR" />
+    <result column="dishName" property="dishName" jdbcType="VARCHAR" />
+    <result column="indroduction" property="indroduction" jdbcType="VARCHAR" />
+    <result column="picture" property="picture" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="VARCHAR" />
+    <result column="score" property="score" jdbcType="VARCHAR" />
+    <result column="other" property="other" jdbcType="VARCHAR" />
+    <result column="createTime" property="createTime" jdbcType="VARCHAR" />
+    <result column="taste" property="taste" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, restaurantId, categoryId, dishName, indroduction, picture, price, score, other, 
+    createTime, taste
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from dish
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByRestaurantId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from dish
+    where restaurantId = #{restaurantId,jdbcType=VARCHAR}
+  </select>
+  <select id="getAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dish
+    order by createTime desc
+  </select>
+  <select id="search" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from dish
+    where dishName like '%'||#{queryString,jdbcType=VARCHAR}||'%'
+    order by score
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from dish
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.foodie.web.model.Dish" >
+    insert into dish (id, restaurantId, categoryId, 
+      dishName, indroduction, picture, 
+      price, score, other, 
+      createTime, taste)
+    values (#{id,jdbcType=VARCHAR}, #{restaurantId,jdbcType=VARCHAR}, #{categoryId,jdbcType=VARCHAR}, 
+      #{dishName,jdbcType=VARCHAR}, #{indroduction,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, 
+      #{price,jdbcType=VARCHAR}, #{score,jdbcType=VARCHAR}, #{other,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=VARCHAR}, #{taste,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.foodie.web.model.Dish" >
+    insert into dish
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="restaurantId != null" >
+        restaurantId,
+      </if>
+      <if test="categoryId != null" >
+        categoryId,
+      </if>
+      <if test="dishName != null" >
+        dishName,
+      </if>
+      <if test="indroduction != null" >
+        indroduction,
+      </if>
+      <if test="picture != null" >
+        picture,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="other != null" >
+        other,
+      </if>
+      <if test="createTime != null" >
+        createTime,
+      </if>
+      <if test="taste != null" >
+        taste,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="restaurantId != null" >
+        #{restaurantId,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null" >
+        #{categoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="dishName != null" >
+        #{dishName,jdbcType=VARCHAR},
+      </if>
+      <if test="indroduction != null" >
+        #{indroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null" >
+        #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=VARCHAR},
+      </if>
+      <if test="other != null" >
+        #{other,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="taste != null" >
+        #{taste,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.foodie.web.model.Dish" >
+    update dish
+    <set >
+      <if test="restaurantId != null" >
+        restaurantId = #{restaurantId,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null" >
+        categoryId = #{categoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="dishName != null" >
+        dishName = #{dishName,jdbcType=VARCHAR},
+      </if>
+      <if test="indroduction != null" >
+        indroduction = #{indroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null" >
+        picture = #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=VARCHAR},
+      </if>
+      <if test="other != null" >
+        other = #{other,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        createTime = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="taste != null" >
+        taste = #{taste,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.foodie.web.model.Dish" >
+    update dish
+    set restaurantId = #{restaurantId,jdbcType=VARCHAR},
+      categoryId = #{categoryId,jdbcType=VARCHAR},
+      dishName = #{dishName,jdbcType=VARCHAR},
+      indroduction = #{indroduction,jdbcType=VARCHAR},
+      picture = #{picture,jdbcType=VARCHAR},
+      price = #{price,jdbcType=VARCHAR},
+      score = #{score,jdbcType=VARCHAR},
+      other = #{other,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=VARCHAR},
+      taste = #{taste,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

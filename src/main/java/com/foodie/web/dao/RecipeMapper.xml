@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.foodie.web.dao.RecipeMapper" >
+  <resultMap id="BaseResultMap" type="com.foodie.web.model.Recipe" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="introduction" property="introduction" jdbcType="VARCHAR" />
+    <result column="userId" property="userId" jdbcType="VARCHAR" />
+    <result column="createTime" property="createTime" jdbcType="VARCHAR" />
+    <result column="tips" property="tips" jdbcType="VARCHAR" />
+    <result column="story" property="story" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="VARCHAR" />
+    <result column="difficult" property="difficult" jdbcType="VARCHAR" />
+    <result column="viewCount" property="viewCount" jdbcType="INTEGER" />
+    <result column="thumbnail" property="thumbnail" jdbcType="VARCHAR" />
+    <result column="score" property="score" jdbcType="VARCHAR" />
+     <result column="collectionCount" property="collectionCount" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, introduction, userId, createTime, tips, story, time, difficult, viewCount, 
+    thumbnail, score,collectionCount
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from recipe
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="getAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from recipe
+    order by createTime desc
+  </select>
+  <select id="getHotRecipes" resultMap="BaseResultMap" parameterType="Integer">
+    select 
+    <include refid="Base_Column_List" />
+    from recipe
+   	order by score desc limit #{count,jdbcType=INTEGER}
+  </select>
+  <select id="getNewRecipes" resultMap="BaseResultMap" parameterType="Integer">
+    select 
+    <include refid="Base_Column_List" />
+    from recipe
+    limit #{count,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from recipe
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.foodie.web.model.Recipe" >
+    insert into recipe (id, name, introduction, 
+      userId, createTime, tips, 
+      story, time, difficult, 
+      viewCount, thumbnail, score,collectionCount
+      )
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, #{tips,jdbcType=VARCHAR}, 
+      #{story,jdbcType=VARCHAR}, #{time,jdbcType=VARCHAR}, #{difficult,jdbcType=VARCHAR}, 
+      #{viewCount,jdbcType=INTEGER}, #{thumbnail,jdbcType=VARCHAR}, #{score,jdbcType=VARCHAR},#{collectionCount,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.foodie.web.model.Recipe" >
+    insert into recipe
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="introduction != null" >
+        introduction,
+      </if>
+      <if test="userId != null" >
+        userId,
+      </if>
+      <if test="createTime != null" >
+        createTime,
+      </if>
+      <if test="tips != null" >
+        tips,
+      </if>
+      <if test="story != null" >
+        story,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="difficult != null" >
+        difficult,
+      </if>
+      <if test="viewCount != null" >
+        viewCount,
+      </if>
+      <if test="thumbnail != null" >
+        thumbnail,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+       <if test="collectionCount != null" >
+        collectionCount,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null" >
+        #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="tips != null" >
+        #{tips,jdbcType=VARCHAR},
+      </if>
+      <if test="story != null" >
+        #{story,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="difficult != null" >
+        #{difficult,jdbcType=VARCHAR},
+      </if>
+      <if test="viewCount != null" >
+        #{viewCount,jdbcType=INTEGER},
+      </if>
+      <if test="thumbnail != null" >
+        #{thumbnail,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=VARCHAR},
+      </if>
+       <if test="collectionCount != null" >
+        #{collectionCount,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.foodie.web.model.Recipe" >
+    update recipe
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null" >
+        introduction = #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        userId = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        createTime = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="tips != null" >
+        tips = #{tips,jdbcType=VARCHAR},
+      </if>
+      <if test="story != null" >
+        story = #{story,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="difficult != null" >
+        difficult = #{difficult,jdbcType=VARCHAR},
+      </if>
+      <if test="viewCount != null" >
+        viewCount = #{viewCount,jdbcType=INTEGER},
+      </if>
+      <if test="thumbnail != null" >
+        thumbnail = #{thumbnail,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=VARCHAR},
+      </if>
+       <if test=" collectionCount != null" >
+         collectionCount = #{ collectionCount,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.foodie.web.model.Recipe" >
+    update recipe
+    set name = #{name,jdbcType=VARCHAR},
+      introduction = #{introduction,jdbcType=VARCHAR},
+      userId = #{userId,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=VARCHAR},
+      tips = #{tips,jdbcType=VARCHAR},
+      story = #{story,jdbcType=VARCHAR},
+      time = #{time,jdbcType=VARCHAR},
+      difficult = #{difficult,jdbcType=VARCHAR},
+      viewCount = #{viewCount,jdbcType=INTEGER},
+      thumbnail = #{thumbnail,jdbcType=VARCHAR},
+      score = #{score,jdbcType=VARCHAR},
+      collectionCount = #{collectionCount,jdbcType=INTEGER},
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.foodie.web.dao.RestaurantMapper" >
+  <resultMap id="BaseResultMap" type="com.foodie.web.model.Restaurant" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="accountName" property="accountName" jdbcType="VARCHAR" />
+    <result column="accountPassword" property="accountPassword" jdbcType="VARCHAR" />
+    <result column="restaurantName" property="restaurantName" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="introduction" property="introduction" jdbcType="VARCHAR" />
+    <result column="restaurantType" property="restaurantType" jdbcType="VARCHAR" />
+    <result column="pictureLarge" property="pictureLarge" jdbcType="VARCHAR" />
+    <result column="pictureSmall" property="pictureSmall" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="score" property="score" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="serveTime" property="serveTime" jdbcType="VARCHAR" />
+    <result column="averagePrice" property="averagePrice" jdbcType="VARCHAR" />
+    <result column="registerTime" property="registerTime" jdbcType="VARCHAR" />
+    <result column="keyWord" property="keyWord" jdbcType="VARCHAR" />
+    <result column="other" property="other" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, accountName, accountPassword, restaurantName, address, introduction, restaurantType, 
+    pictureLarge, pictureSmall, status, score, phone, serveTime, averagePrice, registerTime, 
+    keyWord, other
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from restaurant
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="getAll" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from restaurant
+  </select>
+   <select id="selectByAccountName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from restaurant
+    where accountName = #{accountName,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from restaurant
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.foodie.web.model.Restaurant" >
+    insert into restaurant (id, accountName, accountPassword, 
+      restaurantName, address, introduction, 
+      restaurantType, pictureLarge, pictureSmall, 
+      status, score, phone, 
+      serveTime, averagePrice, registerTime, 
+      keyWord, other)
+    values (#{id,jdbcType=VARCHAR}, #{accountName,jdbcType=VARCHAR}, #{accountPassword,jdbcType=VARCHAR}, 
+      #{restaurantName,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR}, 
+      #{restaurantType,jdbcType=VARCHAR}, #{pictureLarge,jdbcType=VARCHAR}, #{pictureSmall,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{score,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{serveTime,jdbcType=VARCHAR}, #{averagePrice,jdbcType=VARCHAR}, #{registerTime,jdbcType=VARCHAR}, 
+      #{keyWord,jdbcType=VARCHAR}, #{other,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.foodie.web.model.Restaurant" >
+    insert into restaurant
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="accountName != null" >
+        accountName,
+      </if>
+      <if test="accountPassword != null" >
+        accountPassword,
+      </if>
+      <if test="restaurantName != null" >
+        restaurantName,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="introduction != null" >
+        introduction,
+      </if>
+      <if test="restaurantType != null" >
+        restaurantType,
+      </if>
+      <if test="pictureLarge != null" >
+        pictureLarge,
+      </if>
+      <if test="pictureSmall != null" >
+        pictureSmall,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="serveTime != null" >
+        serveTime,
+      </if>
+      <if test="averagePrice != null" >
+        averagePrice,
+      </if>
+      <if test="registerTime != null" >
+        registerTime,
+      </if>
+      <if test="keyWord != null" >
+        keyWord,
+      </if>
+      <if test="other != null" >
+        other,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="accountName != null" >
+        #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="accountPassword != null" >
+        #{accountPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="restaurantName != null" >
+        #{restaurantName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null" >
+        #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="restaurantType != null" >
+        #{restaurantType,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureLarge != null" >
+        #{pictureLarge,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureSmall != null" >
+        #{pictureSmall,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="serveTime != null" >
+        #{serveTime,jdbcType=VARCHAR},
+      </if>
+      <if test="averagePrice != null" >
+        #{averagePrice,jdbcType=VARCHAR},
+      </if>
+      <if test="registerTime != null" >
+        #{registerTime,jdbcType=VARCHAR},
+      </if>
+      <if test="keyWord != null" >
+        #{keyWord,jdbcType=VARCHAR},
+      </if>
+      <if test="other != null" >
+        #{other,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.foodie.web.model.Restaurant" >
+    update restaurant
+    <set >
+      <if test="accountName != null" >
+        accountName = #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="accountPassword != null" >
+        accountPassword = #{accountPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="restaurantName != null" >
+        restaurantName = #{restaurantName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null" >
+        introduction = #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="restaurantType != null" >
+        restaurantType = #{restaurantType,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureLarge != null" >
+        pictureLarge = #{pictureLarge,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureSmall != null" >
+        pictureSmall = #{pictureSmall,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="serveTime != null" >
+        serveTime = #{serveTime,jdbcType=VARCHAR},
+      </if>
+      <if test="averagePrice != null" >
+        averagePrice = #{averagePrice,jdbcType=VARCHAR},
+      </if>
+      <if test="registerTime != null" >
+        registerTime = #{registerTime,jdbcType=VARCHAR},
+      </if>
+      <if test="keyWord != null" >
+        keyWord = #{keyWord,jdbcType=VARCHAR},
+      </if>
+      <if test="other != null" >
+        other = #{other,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.foodie.web.model.Restaurant" >
+    update restaurant
+    set accountName = #{accountName,jdbcType=VARCHAR},
+      accountPassword = #{accountPassword,jdbcType=VARCHAR},
+      restaurantName = #{restaurantName,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      introduction = #{introduction,jdbcType=VARCHAR},
+      restaurantType = #{restaurantType,jdbcType=VARCHAR},
+      pictureLarge = #{pictureLarge,jdbcType=VARCHAR},
+      pictureSmall = #{pictureSmall,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      score = #{score,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      serveTime = #{serveTime,jdbcType=VARCHAR},
+      averagePrice = #{averagePrice,jdbcType=VARCHAR},
+      registerTime = #{registerTime,jdbcType=VARCHAR},
+      keyWord = #{keyWord,jdbcType=VARCHAR},
+      other = #{other,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
